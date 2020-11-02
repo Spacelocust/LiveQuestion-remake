@@ -1,0 +1,25 @@
+{% extends 'base-form.html.twig' %}
+
+{% block body %}
+    <div class="container text-center mt-4">
+        <form action="{{ path('login') }}" method="post" class="form-signin">
+            <img class="mb-4" src="{{ asset('images/LQ_logo_head.png') }}" alt="LQ_logo.png">
+            <h1 class="h3 mb-3 font-weight-normal">Veuillez-vous connecter</h1>
+
+            <label for="username" class="sr-only">Email address</label>
+            <input type="text" id="username" name="_username" class="form-control" placeholder="Nom" required autofocus value="{{ last_username }}">
+
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" name="_password" class="form-control" placeholder="Password" required>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+            <button class="btn btn-lg btn-primary btn-block login-form" type="submit">Se connecter</button>
+            <a class="btn btn-lg btn-primary btn-block login-form" href="{{ path('registration') }}">S'inscrire</a>
+            {% if error %}
+                <div class="alert alert-danger mt-4">
+                    {{ error.messageKey | trans(error.messagedata, 'security')}}
+                </div>
+            {% endif %}
+        </form>
+    </div>
+{% endblock %}

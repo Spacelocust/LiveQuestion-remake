@@ -1,0 +1,140 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+/*** GENERAL ***/
+.divider {
+    width: auto;
+    height: 1px;
+    background: #d4d4d47c;
+    margin: 10px auto;
+}
+
+.avatar-option{
+    width: 50px;
+}
+
+p{
+    margin: 0!important;
+}
+
+a{
+    text-decoration: none!important;
+}
+
+i{
+    padding-right:3px ;
+}
+
+body{
+    background-color: #7A7A7A1F !important;
+}
+.row > *{
+    width: unset!important;
+}
+
+/*** NAVBAR ***/
+.navbar-brand img{
+    width: 200px;
+    height: 50%;
+}
+.nav-link{
+    color: #EC008CB3 !important;
+}
+.dropdown-item{
+    color:#EC008CB3!important;
+}
+/*** FORM GENERAL ***/
+.login-form {
+    background-color: #EC008CB3!important;
+    border: 1px solid #EC008CB3!important;
+}
+
+.login-form:hover {
+    background-color: #fff!important;
+    color: #EC008CB3!important;
+}
+.form-control:focus {
+    border-color:#EC008CB3!important;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 5px #EC008CB3!important;
+}
+
+/*** affichage questions ***/
+.question{
+    background-color:#FFFFFFFF;
+    border-radius: 5px;
+    margin-top:20px;
+    padding: 10px;
+}
+
+.question .info-question .heading-question{
+    display: flex;
+    align-items: center;
+}
+.question .info-question .heading-question a{
+    color:#EC008CB3!important;
+}
+
+.title-question a{
+    color:#FFFFFFFF!important;
+}
+
+.heading-question p:nth-child(2),.heading-question p:nth-child(3),.heading-question p:nth-child(4){
+    padding-left: 10px;
+}
+
+.bubble{
+    background:#EC008C66;
+    color:#FFFFFFFF;
+    padding:7px 15px;
+    border-radius:3px;
+}
+
+.bubble .body-question .title-question h2{
+    font-size: 23px;
+}
+
+.footer-question span{
+    padding-left:5px ;
+}
+
+.btn-like{
+    text-decoration: none!important;
+    border: none;
+    background-color:transparent;
+}
+
+/*** gestion des questions ***/
+
+.admin{
+    color:#EC008C66;
+}
+/*** formulaire ajout d'une question ***/
+
+/*** formulaire de connexion ***/
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+.form-signin input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
