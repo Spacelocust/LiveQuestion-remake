@@ -138,3 +138,43 @@ body{
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
+
+/*--- partie formulaire reponse ---*/
+.formulaire-reponse{
+    padding-top: 20px!important;
+    padding-left:0px!important;
+}
+
+/*--- partie reponse ---*/
+.reponse{
+    background-color: #FFFFFFFF;
+    border-radius: 5px;
+    margin-top:20px;
+    padding: 10px;
+}
+
+.reponse .info-reponse .heading-reponse{
+    display: flex;
+    align-items: center;
+}
+.reponse .info-reponse .heading-reponse a{
+    color: #3700ECB3!important;
+}
+
+.title-reponse a{
+    color: #FFFFFFFF!important;
+}
+
+.heading-reponse p:nth-child(2),.heading-reponse p:nth-child(3){
+    padding-left: 10px;
+}
+
+.bubble-reponse{
+    background:#3700EC66;
+    color:#FFFFFFFF;
+    padding:7px 15px;
+    border-radius:3px;
+}
+.bubble-reponse .body-reponse .title-reponse h2{
+    font-size: 23px;
+}

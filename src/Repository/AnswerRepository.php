@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Answer;
+use App\Entity\Question;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -19,6 +20,37 @@ class AnswerRepository extends ServiceEntityRepository
         parent::__construct($registry, Answer::class);
     }
 
+    /**
+     * Renvoie un tableaux de réponse décroissant par la date
+     * @param Question $question
+     * @return int|mixed|string
+     */
+    public function findAllByDate(Question $question)
+    {
+        return $this->createQueryBuilder('q')
+            ->Where('q.question = :val')
+            ->setParameter('val', $question)
+            ->orderBy('q.date', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    /**
+     * Supprime l'ensemble des réponses de la question
+     * @param Question $value
+     * @return int|mixed|string
+     */
+    public function deleteAnswer(Question $value)
+    {
+        return $this->createQueryBuilder('l')
+            ->delete()
+            ->where('l.question = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
     // /**
     //  * @return Answer[] Returns an array of Answer objects
     //  */

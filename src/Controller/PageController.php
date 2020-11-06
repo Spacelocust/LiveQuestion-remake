@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Answer;
 use App\Entity\Like;
 use App\Entity\Question;
-use App\Entity\User;
+use App\Form\AddAnwserType;
 use App\Form\AddQuestionType;
+use App\Repository\AnswerRepository;
 use App\Repository\LikeRepository;
 use App\Repository\QuestionRepository;
 use App\Repository\UserRepository;
@@ -39,15 +41,20 @@ class PageController extends AbstractController
      * @var LikeRepository
      */
     private LikeRepository $likeRepo;
+    /**
+     * @var AnswerRepository
+     */
+    private AnswerRepository $answerRepo;
 
     public function __construct(QuestionRepository $repoQuestion, Security $security,
-    EntityManagerInterface $manager, UserRepository $repoUser, LikeRepository $likeRepo )
+    EntityManagerInterface $manager, UserRepository $repoUser, LikeRepository $likeRepo, AnswerRepository $answerRepo)
     {
         $this->security = $security;
         $this->manager = $manager;
         $this->repoQuestion = $repoQuestion;
         $this->repoUser = $repoUser;
         $this->likeRepo = $likeRepo;
+        $this->answerRepo = $answerRepo;
     }
 
     /**
@@ -72,17 +79,47 @@ class PageController extends AbstractController
 
     /**
      * Affichage de la question
+     * affichage du formulaire d'ajout d'une réponse
+     * affiche de l'ensemble des réponses de la question
      *
      * @Route("/flux/{slug}-{id}", name="page_question", requirements={"slug": "[a-z0-9\-]*"})
      * @param Question $question
      * @param string $slug
      * @return Response
      */
-    public function questionShow(Question $question ,string $slug): Response
+    public function questionShow(Question $question , string $slug, Request $request): Response
     {
+        $answers = $this->answerRepo->findAllByDate($question);
         $questionSlug = $question->getSlug();
 
+        $userLog = $this->security->getUser();
+        $user = $this->repoUser->findByName($userLog->getUsername());
+
+        $timeZone = new \DateTimeZone('Europe/Paris');
+        $dateTime = new \DateTime('now',$timeZone);
+
+        $manager = $this->manager;
+        $answer = new Answer();
+
+        $form = $this->createForm(AddAnwserType::class, $answer);
+        $form->handleRequest($request);
+
         if ($questionSlug !== $slug){
+
+            return $this->redirectToRoute('page_question',[
+                'id' => $question->getId(),
+                'slug'=> $questionSlug
+            ], 301);
+        }
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $answer->setUser($user);
+            $answer->setDate($dateTime);
+            $answer->setQuestion($question);
+
+            $manager->persist($answer);
+            $manager->flush();
 
             return $this->redirectToRoute('page_question',[
                 'id' => $question->getId(),
@@ -93,7 +130,10 @@ class PageController extends AbstractController
 
         return $this->render('page/question.html.twig', [
             'controller_name' => $slug,
-            'question' => $question
+            'question' => $question,
+            'answers' => $answers,
+            'user'=> $user,
+            'form' => $form->createView()
         ]);
     }
 

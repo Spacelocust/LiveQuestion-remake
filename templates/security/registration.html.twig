@@ -1,21 +1,27 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-form.html.twig' %}
 
  {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
-    <div class="container">
+    <div class="container mt-4">
+        <h2>Créer votre compte</h2>
         {{ form_start(form) }}
-
-        {{ form_row(form.name,{'label':'Nom', 'attr':
-            {'placeholder': 'Veuillez sasir un nom'}}) }}
-        {{ form_row(form.email,{'label':'Mail', 'attr':
-            {'placeholder': 'Veuillez sasir une adresse mail'}}) }}
-        {{ form_row(form.password,{'label':'Mot de passe', 'attr':
-            {'placeholder': 'Veuillez sasir un mot de passe'}}) }}
-        {{ form_row(form.password_confirm,{'label':'Confirmer mot de passe', 'attr':
-            {'placeholder': 'Veuillez confirmer le mot de passe'}}) }}
-        {{ form_row(form.gender) }}
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Enregistrer</button>
+        <div class="form-row">
+            <div class="col-md-6">
+                {{ form_row(form.name,{'label':'Nom', 'attr':
+                    {'placeholder': 'Veuillez sasir un nom'}}) }}
+                {{ form_row(form.email,{'label':'Mail', 'attr':
+                    {'placeholder': 'Veuillez sasir une adresse mail'}}) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_row(form.password,{'label':'Mot de passe', 'attr':
+                    {'placeholder': 'Veuillez sasir un mot de passe'}}) }}
+                {{ form_row(form.password_confirm,{'label':'Confirmer mot de passe', 'attr':
+                    {'placeholder': 'Veuillez confirmer le mot de passe'}}) }}
+                {{ form_row(form.gender) }}
+            </div>
+        </div>
+        <button class="btn btn-primary mt-4 login-form" type="submit">Enregistrer</button>
         {{ form_end(form) }}
     </div>
 {% endblock %}

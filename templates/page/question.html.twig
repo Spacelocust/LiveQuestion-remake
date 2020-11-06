@@ -37,4 +37,39 @@
             </div>
         </div>
     </div>
+    <div class="container formulaire-reponse">
+        {{ form_start(form) }}
+            <div class="form-row">
+            <div class="form-group col-md-4">
+                {{ form_row(form.content,{'label':'Ajouter une reponse', 'attr':
+                    {'placeholder': 'Veuillez sasir une réponse', class:'mt-2 mb-2'}}) }}
+            </div>
+            <button class="btn btn-primary login-form" type="submit">Valider</button>
+        {{ form_end(form) }}
+    </div>
+    {% if answers %}
+    <div class="container">
+        {% for answer  in answers %}
+        <div class="row mt-4">
+            <div class="reponse">
+                <div class="info-reponse">
+                    <div class="heading-reponse">
+                        <img src="{{ asset('images/avatars/') }}{{ answer.user.picture }}" alt="{{ answer.user.picture }}" class="rounded avatar-option">
+                        <p><a href=""></a>{{ answer.user.name }}</p>
+                        <p><i class="far fa-clock"></i>{{ answer.date | format_datetime() }}</p>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="bubble-reponse">
+                        <div class="body-reponse">
+                            <div class="title-reponse">
+                                <h2 class="text-break">{{ answer.content }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 {% endblock %}
